@@ -1016,6 +1016,65 @@
     </section>
     <!--End Testimonial Seectin -->
 
+   <?php 
+
+
+    if ( isset($_POST['submit-form']) ){
+
+
+        $username = $_POST['username'];             
+        $email = $_POST['email'];
+        $phone = $_POST['phone'];
+        $message = $_POST['message'];
+         
+
+
+        //$to = 'contacto@automecanicapalenque.com, dankopech@gmail.com'; 
+        $to = 'jlopez90@live.com.mx';       
+        $mensaje = 'Auto Mecanica Palenque | Conntacto';
+        $from = 'Auto Mecanica Palenque.'; 
+
+        $body ="De: $username\n Telefono: $phone\n Correo: $email\n Mensaje: $message";
+
+
+        if (!$_POST['username']) {
+            $errName = 'Fvaor de ingresar su Nombre';
+        }   
+
+        if (!$_POST['phone']) {
+            $errTel = 'Favor de proporcionar su telefono';
+        }
+
+        if (!$_POST['email'] || !filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+            $errEmail = 'Favor de ingresar correo valido';
+        }       
+
+        if (!$_POST['message']) {
+            $errMessage = 'Favor de ingresar su mensaje';
+        }
+
+
+
+
+        if (!$errName && !$errTel && !$errEmail && !$errMessage ) {
+
+        if (mail ($to, $message, $from, $body )) {
+            echo $result='<div class="alert alert-success">Gracias por enviar sus comentarios.</div>';
+            } else {
+            echo $result='<div class="alert alert-danger">Error al enviar su informacion.</div>';
+            }
+        }
+
+
+           // echo $body;
+
+    }
+
+
+            
+
+    ?>
+
     <!-- Contact Section -->
     <section class="contact-section">
         <div class="auto-container">
@@ -1025,30 +1084,31 @@
             </div>
 
              <div class="contact-form">
-                <form method="post" action="index.html" id="contact-form">
+
+
+                <form method="post" action="index.php" id="contact-form">
                     <div class="row clearfix">
                         <div class="col-md-6 col-sm-12 col-xs-12 form-group pull-right">
                             <textarea name="message" placeholder="Message"></textarea>
+                            <?php echo "<p class='text-danger'>$errMessage</p>"; ?>
                         </div>
 
                         <div class="col-md-6 col-sm-12 col-xs-12">
                             <div class="row clearfix">
                                 <div class="col-md-6 col-sm-6 col-xs-12 form-group">
-                                    <input type="text" name="username" placeholder="Nombre" required="">
+                                    <input type="text" name="username" placeholder="Nombre" required />
+                                    <?php echo "<p class='text-danger'>$username</p>"; ?>
                                 </div>
                                 
                                 <div class="col-md-6 col-sm-6 col-xs-12 form-group">
-                                    <input type="email" name="email" placeholder="Email" required="">
+                                    <input type="email" name="email" placeholder="Email" required />
+                                    <?php echo "<p class='text-danger'>$errEmail</p>"; ?>
                                 </div>
 
                                 <div class="col-md-6 col-sm-6 col-xs-12 form-group">
-                                    <input type="tel" name="phone" placeholder="Telefono" required="">
+                                    <input type="tel" name="phone" placeholder="Telefono" required />
+                                    <?php echo "<p class='text-danger'>$errTel</p>"; ?>
                                 </div>
-                                
-                                <div class="col-md-6 col-sm-6 col-xs-12 form-group">
-                                    <input type="text" name="subject" placeholder="Email" required="">
-                                </div>
-
                                 <div class="col-md-12 col-sm-12 col-xs-12 form-group">
                                     <button type="submit" name="submit-form">send Massage</button>
                                 </div>
@@ -1057,6 +1117,10 @@
 
                     </div>
                 </form>
+
+
+
+
             </div>
 
             <div class="contact-info">
