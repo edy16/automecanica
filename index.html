@@ -1016,45 +1016,6 @@
     </section>
     <!--End Testimonial Seectin -->
 
-   <?php 
-
-
-
-    if ( isset($_POST['submit-form']) ){
-
-
-        $username = $_POST['username'];             
-        $email = $_POST['email'];
-        $phone = $_POST['phone'];
-        $message = $_POST['message'];
-         
-
-
-        //$to = 'contacto@automecanicapalenque.com, dankopech@gmail.com'; 
-        $to = 'jlopez90@live.com.mx';       
-        $mensaje = 'Auto Mecanica Palenque | Conntacto';
-        $from = 'Auto Mecanica Palenque.'; 
-
-        $body ="De: $username\n Telefono: $phone\n Correo: $email\n Mensaje: $message";
-
-      
-        if (mail ($to, $message, $from, $body )) {
-            echo $result='<div class="alert alert-success">Gracias por enviar sus comentarios.</div>';
-            } else {
-            echo $result='<div class="alert alert-danger">Error al enviar su informacion.</div>';
-            }
-      
-
-
-           // echo $body;
-
-    }
-
-
-            
-
-    ?>
-
     <!-- Contact Section -->
     <section class="contact-section">
         <div class="auto-container">
@@ -1064,9 +1025,8 @@
             </div>
 
              <div class="contact-form">
-
-
-                <form method="post" action="index.php" id="contact-form">
+                
+                <form method="post" action="sendemail.php" id="contact-form">
                     <div class="row clearfix">
                         <div class="col-md-6 col-sm-12 col-xs-12 form-group pull-right">
                             <textarea name="message" placeholder="Message"></textarea>
